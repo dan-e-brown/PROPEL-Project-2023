@@ -1,0 +1,104 @@
+---
+title: "PROPEL Project"
+author: "Daniel Brown"
+date: '2023-05-22'
+output: html_document
+---
+
+# Install Packages
+
+```{r}
+install.packages(tidyverse)
+
+```
+
+# Load Packages and Read in Data
+
+```{r}
+
+library(tidyverse)
+library(ggplot2)
+
+
+df <- read_csv("~/R/PROPEL PROJECT Datasets/aids.csv")
+summary(df)
+glimpse(df)  
+
+
+```
+
+# A question we can ask regarding this data...
+
+## What year had the highest rate of HIV incidence (new infections) in Zimbabwe?
+
+### Scatter plot of New Infections From 1990-2020.
+
+```{r}
+#Scatter plot of new HIV incidence (new infection) rate in adults by year per 100,000 people.
+df %>%
+  ggplot(aes(x=Year, y=`Data.New HIV Infections.Incidence Rate Among Adults`)) + 
+    geom_point(
+        color="red",
+        fill="#69b3a2",
+        shape=21,
+        alpha=0.5,
+        size=2,
+        stroke = 1
+        ) +
+      ylab("New Infections of Adults") + 
+      xlab("Year")  
+
+```
+
+### This data is really cluttered and gives an incorrect answer at first blush.The graph demonstrates that the answer is 1995 but the question is looking for most new infections in Zimbabwe. This data needs to be filtered.
+
+```{r}
+# Create modified dataset with Country specification
+zb.incidence <- filter(df, Country == "Zimbabwe" )
+# Create scatterplot with custom label for identified max
+zb.incidence %>%
+  ggplot(aes(x=Year, y=`Data.New HIV Infections.Incidence Rate Among Adults`)) + 
+    geom_point(
+        color="red",
+        fill="#69b3a2",
+        shape=21,
+        alpha=0.5,
+        size=2,
+        stroke = 1
+        ) +
+      ylab("New Infection Rate of Adults / 100,000 People") + 
+      xlab("Year") +
+  geom_label(
+    label="Max", 
+    x=1991,
+    y=43.5,
+    label.padding = unit(0.15, "lines"), # Rectangle size around label
+    label.size = 0.35,
+    color = "black",
+    fill="#69b3a2"
+  )
+```
+
+### This is much clearer. In Zimbabwe, the data indicates that the year with the highest amount of new infections between all adults was 1991. Additionally, the graph demonstrates a clear drop-off in the amount of reported new infection cases that year onward. Another powerful takeaway that can be seen from the first graph is the overall downward trend in the amount of new infection cases. This matches many governments (lackluster) attempts at battling the HIV epidemic that came to it's height in the late 1980s - mid 1990s with 1995 being the year where HIV was reported to be at it's worldwide peak for HIV-related mortality rates.
+
+# Citations and Resources:
+
+## Custom Scatter Plot
+
+### <https://r-graph-gallery.com/273-custom-your-scatterplot-ggplot2.html>
+
+## How to learn R in 39 minutes
+
+### <https://www.youtube.com/watch?v=yZ0bV2Afkjc>
+
+## Labeling Points in a Scatter plot
+
+### <https://r-graphics.org/recipe-scatter-labels>
+
+## Add text labels with ggplot2
+
+### <https://r-graph-gallery.com/275-add-text-labels-with-ggplot2.html>
+
+## HIV-AIDS Government Timeline
+
+### <https://www.hiv.gov/hiv-basics/overview/history/hiv-and-aids-timeline/>
