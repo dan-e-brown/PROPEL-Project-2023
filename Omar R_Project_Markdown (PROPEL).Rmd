@@ -1,0 +1,70 @@
+---
+title: "R Project Markdown"
+author: "Omar Valdez"
+date: "2023-05-23"
+output: html_document
+---
+
+```{r}
+ install.packages("tidyverse")
+```
+
+# Load Packages and Data
+
+```{r}
+library(tidyverse)
+
+aids_df<-read_csv("aids.csv")
+
+view(aids_df)
+```
+
+# Question regarding this data:
+
+## What year had the highest rate of HIV incidence in Zimbabwe?
+
+### First I filtered the data set for the country of Zimbabwe
+
+```{r}
+zimbabwe_aids <- filter(aids_df, Country == "Zimbabwe") 
+
+view(zimbabwe_aids)
+```
+
+### Next I selected the columns "Country", "Year", and "Data.New HIV Infections.Incidence Rate Among Adults"
+
+```{r}
+zimbabwe_new_hiv_infections <- zimbabwe_aids %>%
+  select("Country", "Year","Data.New HIV Infections.Incidence Rate Among Adults")
+
+view(zimbabwe_new_hiv_infections)
+```
+
+### Next I created a matrix for "Incidence Rate Among Adults"
+
+```{r}
+zimbabwe_incidence_rate<-c(39.58, 41.86, 41.54, 39.15, 35.65, 31.44, 27.78, 24.37, 21.41, 18.8, 16.92, 15.27, 14.06, 13.07, 12.28, 11.53, 10.78, 10.21, 9.69, 9.20, 8.83, 7.90, 7.06, 6.50, 5.85, 5.24, 4.67, 4.05, 3.26, 3.16, 2.44)
+
+```
+
+### Next I used the matrix to construct a bar plot with a title and labelled axes
+
+```{r}
+barplot(zimbabwe_incidence_rate, names.arg = c(1990:2020), xlab = "Year", ylab = "New Infections of Adults per 100,000 people", main = "New HIV Infections in Zimbabwe")
+```
+
+### From the bar plot, we can see that 1991 had the highest incidence of new HIV infections.
+
+## Citations and Resources:
+
+### How To Make a Bar Graph on R - YouTube
+
+#### <https://www.youtube.com/watch?v=8yhDd5dlr9k>
+
+### How to learn R in 39 minutes
+
+#### <https://www.youtube.com/watch?v=yZ0bV2Afkjc>
+
+### R for Everyone Part 2
+
+#### <https://media.ucsf.edu/media/R+for+Everyone+Part+2+%28June+2022%29/1_fdvlohdz>
