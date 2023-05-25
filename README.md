@@ -1,2 +1,4 @@
-# DB-PROPEL-Project-2023
-Here lies a public repository centering around the PROPEL Programming and Statistics Course Project occurring in April-May 2023 session.  
+# Dan Brown and Omar Valdez PROPEL Project
+## This repository holds the dataset revolving HIV/AIDS summary statistics from the past 30 years (1990-2020).  The categories are broken down by location (country), gender (male/female) and age.  Omar and I were interested in the disease progression that is seen in the ongoing AIDS epidemic.  We wanted to know the number of new infections that were happenning in a certain country during this recorded period.  We lay out multuiple approaches to quantify how to figure out Zimbabwe's incidence rate from 1990-2020 and which year this number was the highest.  We were interested to see this answer because we both were slightly familiar with the efforts taken to battle the HIV/AIDS epidemic and wanted to know if our general knowledge macthed up with statistics.
+# Link to 2 minute video regarding explanation of the code and procedure:  
+# Citations are in markdown file with hyperlinks.
